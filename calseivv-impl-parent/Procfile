@@ -1,1 +1,1 @@
-web: java -jar calseivv-impl-web/target/calseivv-impl-web-1.0.0.jar calseivv-impl-web/target/*.war
+web: java -jar webapp-runner.jar calseivv-impl-web/target/*.war
