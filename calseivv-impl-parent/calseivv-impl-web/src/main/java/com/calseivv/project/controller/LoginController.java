@@ -19,7 +19,6 @@ import java.io.Serializable;
 @SessionScope
 @Component(value = "loginController")
 @ELBeanName(value = "loginController")
-@Join(path = "/", to = "/login.jsf")
 public class LoginController implements Serializable {
 
     @Autowired
