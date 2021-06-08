@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp calseivv-impl-web/target/classes:calseivv-impl-web/target/dependency/* com.calseivv.project.Application
+web: java $JAVA_OPTS -cp /target/classes:/target/dependency/* com.calseivv.project.Application
