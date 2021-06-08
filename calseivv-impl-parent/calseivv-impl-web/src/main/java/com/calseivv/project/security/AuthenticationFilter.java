@@ -41,8 +41,8 @@ public class AuthenticationFilter implements Filter {
             } else {
                 res.sendRedirect(req.getContextPath() + "/login.jsf"); // Anonymous user. Redirect to login page
             }
-        } catch (Throwable t) {
-            System.out.println(t);
+        } catch (Exception t) {
+            t.printStackTrace();
         }
     }
 
