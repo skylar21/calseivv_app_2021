@@ -112,6 +112,7 @@
     </repositories>
 
     <build>
+        <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -125,7 +126,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.places.Main</mainClass>
+                    <mainClass>com.calseivv.project.Application</mainClass>
                 </configuration>
                 <executions>
                     <execution>
