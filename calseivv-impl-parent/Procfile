@@ -1,1 +1,1 @@
-web: java -jar  calseivv-impl-web/target/dependency/webapp-runner.jar calseivv-impl-web/target/*.war
+web: java $JAVA_OPTS -jar calseivv-impl-web/target/dependency/webapp-runner.jar --port $PORT calseivv-impl-web/target/*.war
