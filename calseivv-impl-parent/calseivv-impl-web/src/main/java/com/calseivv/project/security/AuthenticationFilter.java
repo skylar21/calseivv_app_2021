@@ -33,7 +33,6 @@ public class AuthenticationFilter implements Filter {
                 res.sendRedirect("/secured/home.jsf");
             }
 
-
             //allow user in publicly accessible paths
             if (reqURI.indexOf("/login.jsf") >= 0 || reqURI.indexOf("/registration.jsf") >= 0 || reqURI.indexOf("/public/") >= 0
                     || reqURI.indexOf("/resources") >= 0 || reqURI.indexOf("/forget.jsf") >= 0
