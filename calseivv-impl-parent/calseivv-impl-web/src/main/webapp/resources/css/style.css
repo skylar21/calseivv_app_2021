@@ -1,0 +1,105 @@
+
+
+.centered {
+	text-align: center;
+}
+
+.panelGridCenter {
+	margin: 0 auto;
+}
+
+.timer {
+	position: fixed;
+    top: 0px;
+    right: 0px;
+	color: white;
+	font-size: 15px;
+	font-family:'Segoe UI';
+	align: center;
+	font-style: bold;
+}
+
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #ba3cc4;
+	color: white;
+	font-size: 11px;
+}
+
+.header {
+	overflow: hidden;
+	padding: 10px 10px;
+}
+
+.header a {
+	float: left;
+	color: black;
+	text-align: center;
+	padding: 5px;
+	text-decoration: none;
+	font-size: 17px;
+	line-height: 25px;
+	border-radius: 4px;
+}
+
+.header a:hover {
+	background-color: #ba3cc4;
+	color: white;
+}
+
+.header a.active {
+	background-color: #ba3cc4;
+	color: white;
+}
+
+.header-right {
+	float: right;
+}
+
+body .ui-toolbar {
+	margin: 0 auto;
+}
+
+body .ui-panel .ui-panel-titlebar {
+	background-color: #ba3cc4;
+	color: white;
+}
+
+body .ui-button {
+	border: none;
+	background-color: #ba3cc4;
+	color: white;
+}
+
+body .ui-button.ui-state-hover,
+.ui-button.ui-state-active {
+	border: none;
+	background-color: #ffff40;
+	color: black;
+}
+
+.customPanelGrid .ui-panelgrid-content {
+	align-items: center;
+}
+
+.ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
+	text-align: center;
+}
+
+body .ui-fileupload-simple .ui-widget {
+    min-width: 80px;
+    width: 80px;
+}
+
+.col1 {
+    width: 20%;
+    vertical-align: top;
+}
+
+.col2 {
+    width: 80%;
+    vertical-align: top;
+}

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:botDetect="https://captcha.com/java/jsf">
+<h:head>
+    <title>CalSEIVV Registration</title>
+    <link rel="stylesheet" href="resources/css/style.css" type="text/css"/>
+    <link rel="icon" href="resources/images/icon.png" type="image/icon type"/>
+    <script src="resources/script/script.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</h:head>
+
+<h:body onload="#{registrationController.loadData()}">
+    <h:form id="registerForm">
+        <p:toolbar>
+            <p:toolbarGroup>
+                <p:graphicImage name="images/logo.svg" height="70px" width="150px"/>
+            </p:toolbarGroup>
+            <p:toolbarGroup>
+                <div class="header">
+                    <div class="header-right">
+                        <p:button value="Login" outcome="/login.jsf?faces-redirect=true"/>
+                    </div>
+                </div>
+            </p:toolbarGroup>
+        </p:toolbar>
+        <p:growl id="msg" showDetail="true" life="3000" globalOnly="true"/>
+
+        <p:divider layout="horizontal">
+            <b>REGISTRATION</b>
+        </p:divider>
+
+        <h:panelGrid columns="5">
+            <h:panelGrid columns="1" style="width: 500px;">
+
+                <p:panel>
+
+                    <f:facet name="header">
+                        <i class="pi pi-user"></i>
+                        User Information
+                    </f:facet>
+
+                    <h:panelGrid id="registrationPanel" columns="3" style="width: 100%">
+
+                        <h:outputText for="firstNameId" value="First Name: "/>
+                        <p:inputText id="firstNameId"
+                                     value="#{registrationController.registrationRequest.firstName}"
+                                     label="First Name: "
+                                     required="true"></p:inputText>
+                        <p:message for="firstNameId" display="icon"/>
+
+                        <h:outputText value="Middle Name: "/>
+                        <p:inputText id="middleNameId"
+                                     value="#{registrationController.registrationRequest.middleName}"
+                                     label="Middle Name: "
+                                     required="true"></p:inputText>
+                        <p:message for="middleNameId" display="icon"/>
+
+                        <h:outputText value="Last Name: "/>
+                        <p:inputText id="lastNameId"
+                                     value="#{registrationController.registrationRequest.lastName}"
+                                     label="Last Name: "
+                                     required="true"></p:inputText>
+                        <p:message for="lastNameId" display="icon"/>
+
+                        <h:outputText value="Sex: "/>
+                        <p:selectOneRadio id="sex" value="#{registrationController.registrationRequest.sex}"
+                                          unselectable="false">
+                            <f:selectItem itemLabel="Male" itemValue="M"/>
+                            <f:selectItem itemLabel="Female" itemValue="F"/>
+                        </p:selectOneRadio>
+
+                        <p:spacer/>
+
+                        <h:outputText value="Birthdate: "/>
+                        <p:datePicker id="navigator" value="#{registrationController.registrationRequest.birthdate}"
+                                      monthNavigator="true" yearNavigator="true" label="Birthdate" required="true"/>
+                        <p:message for="navigator" display="icon"/>
+
+                    </h:panelGrid>
+
+                </p:panel>
+
+                <p:spacer/>
+
+                <p:panel>
+                    <f:facet name="header">
+                        <i class="pi pi-lock"></i>
+                        User Credentials
+                    </f:facet>
+                    <h:panelGrid columns="3" style="width: 100%">
+                        <h:outputText value="Username: "/>
+                        <p:inputText id="usernameId"
+                                     value="#{registrationController.registrationRequest.username}" label="Username"
+                                     required="true"></p:inputText>
+                        <p:message for="usernameId" display="icon"/>
+
+                        <h:outputText value="Password: "/>
+                        <p:password id="passwordId" value="#{registrationController.registrationRequest.password}"
+                                    toggleMask="true" redisplay="true" label="Password"
+                                    required="true"></p:password>
+                        <p:message for="passwordId" display="icon"/>
+
+                    </h:panelGrid>
+                </p:panel>
+
+            </h:panelGrid>
+
+            <p:divider layout="vertical"/>
+
+            <h:panelGrid columns="1" style="width: 400px;">
+
+                <p:card>
+                    <f:facet name="subtitle">
+                        Allow camera access to take your photo.
+                    </f:facet>
+                    <p:outputPanel id="photo" style="text-align: center;">
+                        <p:graphicImage name="demo/images/#{registrationController.captureFilename}.jpeg"
+                                        rendered="#{not empty registrationController.captureFilename}"
+                                        height="130px"/>
+                    </p:outputPanel>
+                    <p:dialog header=" Capture Face Photo
+                            " widgetVar="dlg1" minHeight="40" showEffect="fade">
+                        <h:panelGrid cellpadding="5">
+                            <p:photoCam widgetVar="pc" listener="#{registrationController.oncapture}"
+                                        update="photo"/>
+                        </h:panelGrid>
+                        <center>
+                            <p:commandButton type="button" value="Capture"
+                                             onclick="PF('pc').capture(); PF('dlg1').hide();"
+                                             icon="pi pi-camera"/>
+                        </center>
+
+                    </p:dialog>
+                    <center>
+                        <p:commandButton value="Capture" type="button" icon="pi pi-external-link"
+                                         onclick="PF('dlg1').show()" style="margin-top: 10px"/>
+                    </center>
+
+                </p:card>
+
+                <p:card>
+                    <f:facet name="subtitle">
+                        Upload any ID to prove your identity.
+                    </f:facet>
+                    <h:form id="uploadForm" enctype="multipart/form-data">
+                        <p:fileUpload id="fileId" sizeLimit="1024000"
+                                      allowTypes="/(\.|\/)(jpe?g|png)$/"
+                                      invalidSizeMessage="Maximum file size allowed is 100 KB"
+                                      invalidFileMessage="only jpg | jpeg | png is allowed"
+                                      label="Add" mode="simple" skinSimple="true" required="true"
+                                      auto="true" process="@this"
+                                      listener="#{registrationController.uploadIdentification}"
+                                      update="fileOutputName"/>
+                        <h:outputText id="fileOutputName" value="#{registrationController.displayFilename}"/>
+                    </h:form>
+                </p:card>
+            </h:panelGrid>
+
+            <p:divider layout="vertical"/>
+
+            <h:panelGrid columns="1" style="width: 100%;">
+
+                <p:card>
+                    <f:facet name="subtitle">
+                        Select Secret Question for Password Recovery.
+                    </f:facet>
+                    <h:panelGrid columns="3" style="width: 100%">
+                        <h:outputText value="Secret Question: "/>
+                        <p:selectOneMenu id="qListSelection"
+                                         value="#{registrationController.registrationRequest.secretId}">
+                            <f:selectItems value="#{registrationController.questionList.questions}" var="qList"
+                                           itemLabel="#{qList.question}" itemValue="#{qList.id}"/>
+                        </p:selectOneMenu>
+
+                        <p:spacer/>
+
+                        <h:outputText value="Answer: "/>
+                        <p:inputText id="answerId"
+                                     value="#{registrationController.registrationRequest.secretAnswer}" label="Answer: "
+                                     required="true"></p:inputText>
+                        <p:message for="answerId" display="icon"/>
+                    </h:panelGrid>
+                </p:card>
+
+                <p:card>
+                    <center>
+                        <f:facet name="subtitle">
+                            Retype the characters from the picture.
+                        </f:facet>
+                        <botDetect:jsfCaptcha id="registrationControllerCaptcha"
+                                              userInputID="signup_captchaCode"
+                                              imageWidth="180"
+                                              imageHeight="50"
+                                              binding="#{registrationController.captcha}"/>
+
+                        <h:inputText id="signup_captchaCode" label="captchaCode"
+                                     value="#{registrationController.captchaCode}" style="margin-top: 10px"/>
+                    </center>
+                </p:card>
+
+                <p:commandButton action="#{registrationController.register}" value="Register"
+                                 update="registerForm" icon="pi pi-send"
+                                 style="margin-top: 30px; width: 200px; height: 50px; margin-left: 140px;"
+                                 oncomplete="handleSignupRequest(xhr, status, args)"/>
+
+            </h:panelGrid>
+
+        </h:panelGrid>
+    </h:form>
+
+    <div class="footer">
+        <p style="font-family:'Segoe UI'">© 2021 Calamba City Science High School
+        </p>
+    </div>
+</h:body>
+</html>

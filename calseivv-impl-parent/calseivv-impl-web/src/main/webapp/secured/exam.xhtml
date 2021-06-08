@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>CalSEIVV - Examination</title>
+    <link rel="stylesheet" href="../resources/css/style.css" type="text/css"/>
+    <link rel="icon" href="../resources/images/icon.png" type="image/icon type"/>
+    <script src="../resources/script/script.js"></script>
+</h:head>
+<h:body onload="#{examController.loadQuestions()};">
+    <div class="timer">
+        <p:card>
+            <b>TIME LEFT:</b>
+            <p:divider/>
+            <div id="countdown" align="center"></div>
+        </p:card>
+    </div>
+    <h:form id="examForm">
+        <p:dialog widgetvar="dlgWidget" visible="true" modal="true" onHide="countdown('countdown', 70, 0)">
+            <f:facet name="header">
+                Reminder
+            </f:facet>
+            You are about to take a 50-item exam.<br/> Please make sure to answer all the questions with honesty and
+            follow
+            the directions carefully. <br/><br/>
+
+            <div style="color: red">Closing this browser tab may result to a failed examination.</div>
+            <p:divider/>
+            <b>Padayon, CCSISter!</b>
+
+        </p:dialog>
+        <p:toolbar>
+            <p:toolbarGroup>
+                <p:graphicImage name="images/logo.svg" height="70px" width="150px"/>
+            </p:toolbarGroup>
+        </p:toolbar>
+
+        <p:divider><h3>SCIENCE - BIOLOGY</h3></p:divider>
+        <p:dataList var="qsbio" value="#{examController.loadSubject('BIOLOGY').questions}" type="ordered"
+                    rowIndexVar="index">
+            <h:outputText value="#{qsbio.question}" escape="false"/>
+            <p:selectOneRadio id="choiceId" value="#{examController.sampleMap[qsbio.id]}"
+                              layout="pageDirection" rendered="#{qsbio.questionType == 'MC'}" style="margin: 5px"
+                              required="true">
+                <f:selectItems value="#{examController.loadChoices(qsbio.id)}" var="c" itemLabel="#{c}"
+                               itemValue="value_#{examController.loadChoices(qsbio.id).indexOf(c)+1}"/>
+            </p:selectOneRadio>
+            <p:outputPanel rendered="#{qsbio.questionType == 'ID'}" style="margin: 10px">
+                <h:outputText for="idenId" value="Answer: "/>
+                <p:inputText id="idenId" value="#{examController.sampleMap[qsbio.id]}" required="true"/>
+            </p:outputPanel>
+        </p:dataList>
+
+        <p:divider><h3>SCIENCE - CHEMISTRY</h3></p:divider>
+        <p:dataList var="qchem" value="#{examController.loadSubject('CHEMISTRY').questions}" type="ordered"
+                    rowIndexVar="index">
+            <h:outputText value="#{qchem.question}" escape="false"/>
+            <p:selectOneRadio id="choiceId" value="#{examController.sampleMap[qchem.id]}"
+                              layout="pageDirection" rendered="#{qchem.questionType == 'MC'}" style="margin: 5px"
+                              required="true">
+                <f:selectItems value="#{examController.loadChoices(qchem.id)}" var="c" itemLabel="#{c}"
+                               itemValue="value_#{examController.loadChoices(qchem.id).indexOf(c)+1}"/>
+            </p:selectOneRadio>
+            <p:outputPanel rendered="#{qchem.questionType == 'ID'}" style="margin: 10px">
+                <h:outputText for="idenId" value="Answer: "/>
+                <p:inputText id="idenId" value="#{examController.sampleMap[qchem.id]}" required="true"/>
+            </p:outputPanel>
+        </p:dataList>
+
+        <p:divider><h3>SCIENCE - PHYSICS</h3></p:divider>
+        <p:dataList var="qphy" value="#{examController.loadSubject('PHYSICS').questions}" type="ordered"
+                    rowIndexVar="index">
+            <h:outputText value="#{qphy.question}" escape="false"/>
+            <p:selectOneRadio id="choiceId" value="#{examController.sampleMap[qphy.id]}"
+                              layout="pageDirection" rendered="#{qphy.questionType == 'MC'}" style="margin: 5px"
+                              required="true">
+                <f:selectItems value="#{examController.loadChoices(qphy.id)}" var="c" itemLabel="#{c}"
+                               itemValue="value_#{examController.loadChoices(qphy.id).indexOf(c)+1}"/>
+            </p:selectOneRadio>
+            <p:outputPanel rendered="#{qphy.questionType == 'ID'}" style="margin: 10px">
+                <h:outputText for="idenId" value="Answer: "/>
+                <p:inputText id="idenId" value="#{examController.sampleMap[qphy.id]}" required="true"/>
+            </p:outputPanel>
+        </p:dataList>
+
+        <p:divider><h3>SCIENCE - GENERAL SCIENCE</h3></p:divider>
+        <p:dataList var="qgs" value="#{examController.loadSubject('GENERAL SCIENCE').questions}" type="ordered"
+                    rowIndexVar="index">
+            <h:outputText value="#{qgs.question}" escape="false"/>
+            <p:selectOneRadio id="choiceId" value="#{examController.sampleMap[qgs.id]}"
+                              layout="pageDirection" rendered="#{qgs.questionType == 'MC'}" style="margin: 5px"
+                              required="true">
+                <f:selectItems value="#{examController.loadChoices(qgs.id)}" var="c" itemLabel="#{c}"
+                               itemValue="value_#{examController.loadChoices(qgs.id).indexOf(c)+1}"/>
+            </p:selectOneRadio>
+            <p:outputPanel rendered="#{qgs.questionType == 'ID'}" style="margin: 10px">
+                <h:outputText for="idenId" value="Answer: "/>
+                <p:inputText id="idenId" value="#{examController.sampleMap[qgs.id]}" required="true"/>
+            </p:outputPanel>
+        </p:dataList>
+
+        <p:divider><h3>MATHEMATICS</h3></p:divider>
+
+        <p:dataList var="qmath" value="#{examController.loadSubject('MATHEMATICS').questions}"
+                    type="ordered"
+                    rowIndexVar="index">
+            <h:outputText value="#{qmath.question}" escape="false"/>
+            <p:selectOneRadio id="choiceId" value="#{examController.sampleMap[qmath.id]}"
+                              layout="pageDirection" rendered="#{qmath.questionType == 'MC'}" style="margin: 5px"
+                              required="true">
+                <f:selectItems value="#{examController.loadChoices(qmath.id)}" var="c" itemLabel="#{c}"
+                               itemValue="value_#{examController.loadChoices(qmath.id).indexOf(c)+1}"/>
+            </p:selectOneRadio>
+            <p:outputPanel rendered="#{qmath.questionType == 'ID'}" style="margin: 10px">
+                <h:outputText for="idenId" value="Answer: "/>
+                <p:inputText id="idenId" value="#{examController.sampleMap[qmath.id]}" required="true"/>
+            </p:outputPanel>
+        </p:dataList>
+
+        <p:divider><h3>LANGUAGE PROFICIENCY</h3></p:divider>
+
+        <p:dataList var="qlp1" value="#{examController.loadSubject('LANGUAGE PROFICIENCY - 1').questions}"
+                    type="ordered"
+                    rowIndexVar="index">
+            <f:facet name="header">
+                Instructions: Each item contains four underlined words or phrases. If there is an error in the sentence,
+                choose the letter of the corresponding answer. If not, choose 'No Error'.
+            </f:facet>
+            <h:outputText value="#{qlp1.question}" escape="false"/>
+            <p:selectOneRadio id="choiceId" value="#{examController.sampleMap[qlp1.id]}"
+                              layout="pageDirection" rendered="#{qlp1.questionType == 'MC'}" style="margin: 5px"
+                              required="true">
+                <f:selectItems value="#{examController.loadChoices(qlp1.id)}" var="c" itemLabel="#{c}"
+                               itemValue="value_#{examController.loadChoices(qlp1.id).indexOf(c)+1}"/>
+            </p:selectOneRadio>
+            <p:outputPanel rendered="#{qlp1.questionType == 'ID'}" style="margin: 10px">
+                <h:outputText for="idenId" value="Answer: "/>
+                <p:inputText id="idenId" value="#{examController.sampleMap[qlp1.id]}" required="true"/>
+            </p:outputPanel>
+        </p:dataList>
+
+        <p:dataList var="qlp2" value="#{examController.loadSubject('LANGUAGE PROFICIENCY - 2').questions}"
+                    type="ordered"
+                    rowIndexVar="index">
+            <f:facet name="header" style="text-align: right">
+                Instructions: Fill in the blank using the most correct answer in the choices.
+                <br/><br/>
+                <div align="left" style="font-style: italic">
+                    <h:outputText
+                            value="The ___(1)___  harmless act of posting photographs on Instagram is actually quite dangerous. __(2)__ your photos, potential stalkers and kidnappers may be able to __(3)__ pinpoint the exact location on where you had been by the use of geo-tagging."/>
+                </div>
+            </f:facet>
+
+            <h:outputText value="#{qlp2.question}" escape="false" style="margin: 10px"/>
+            <p:selectOneRadio id="choiceId" value="#{examController.sampleMap[qlp2.id]}"
+                              layout="pageDirection" rendered="#{qlp2.questionType == 'MC'}" style="margin: 5px"
+                              required="true">
+                <f:selectItems value="#{examController.loadChoices(qlp2.id)}" var="c" itemLabel="#{c}"
+                               itemValue="value_#{examController.loadChoices(qlp2.id).indexOf(c)+1}"/>
+            </p:selectOneRadio>
+            <p:outputPanel rendered="#{qlp2.questionType == 'ID'}" style="margin: 10px">
+                <h:outputText for="idenId" value="Answer: "/>
+                <p:inputText id="idenId" value="#{examController.sampleMap[qlp2.id]}" required="true"/>
+            </p:outputPanel>
+        </p:dataList>
+
+        <p:dataList var="qlp3" value="#{examController.loadSubject('LANGUAGE PROFICIENCY - 3').questions}"
+                    type="ordered"
+                    rowIndexVar="index">
+            <f:facet name="header" style="text-align: right">
+                Instructions: Fill in the blank using the most correct answer in the choices.
+                <br/><br/>
+                <div align="left" style="font-style: italic">
+                    <h:outputText
+                            value="Yesterday, my classmates and __(1)__ had discovered that we had passed the entrance examinations to the schools we enrolled in. It was a joyful moment for all of us, __(2)__ we felt that all of our efforts were not wasted."/>
+                </div>
+            </f:facet>
+
+            <h:outputText value="#{qlp3.question}" escape="false" style="margin: 10px"/>
+            <p:selectOneRadio id="choiceId" value="#{examController.sampleMap[qlp3.id]}"
+                              layout="pageDirection" rendered="#{qlp3.questionType == 'MC'}" style="margin: 5px"
+                              required="true">
+                <f:selectItems value="#{examController.loadChoices(qlp3.id)}" var="c" itemLabel="#{c}"
+                               itemValue="value_#{examController.loadChoices(qlp3.id).indexOf(c)+1}"/>
+            </p:selectOneRadio>
+            <p:outputPanel rendered="#{qlp3.questionType == 'ID'}" style="margin: 10px">
+                <h:outputText for="idenId" value="Answer: "/>
+                <p:inputText id="idenId" value="#{examController.sampleMap[qlp3.id]}" required="true"/>
+            </p:outputPanel>
+        </p:dataList>
+
+        <p:dataList var="qlp4" value="#{examController.loadSubject('LANGUAGE PROFICIENCY - 4').questions}"
+                    type="ordered"
+                    rowIndexVar="index">
+            <f:facet name="header" style="text-align: right">
+                Panuto: Ang bawat pangungusap ay may apat na naka-linyang mga salita o parirala. Kung may mali sa
+                pangungusap, piliin ang letra ng tamang sagot. Kung wala, piliin ang 'Walang Mali'.
+            </f:facet>
+
+            <h:outputText value="#{qlp4.question}" escape="false" style="margin: 10px"/>
+            <p:selectOneRadio id="choiceId" value="#{examController.sampleMap[qlp4.id]}"
+                              layout="pageDirection" rendered="#{qlp4.questionType == 'MC'}" style="margin: 5px"
+                              required="true">
+                <f:selectItems value="#{examController.loadChoices(qlp4.id)}" var="c" itemLabel="#{c}"
+                               itemValue="value_#{examController.loadChoices(qlp4.id).indexOf(c)+1}"/>
+            </p:selectOneRadio>
+            <p:outputPanel rendered="#{qlp4.questionType == 'ID'}" style="margin: 10px">
+                <h:outputText for="idenId" value="Answer: "/>
+                <p:inputText id="idenId" value="#{examController.sampleMap[qlp4.id]}" required="true"/>
+            </p:outputPanel>
+        </p:dataList>
+
+        <p:dataList var="qlp5" value="#{examController.loadSubject('LANGUAGE PROFICIENCY - 5').questions}"
+                    type="ordered"
+                    rowIndexVar="index">
+            <f:facet name="header" style="text-align: right">
+                Panuto: Sa mga sumusunod na mga talata, piliin ang sagot na akma sa mga nakasaad na patlang.
+                <br/><br/>
+                <div align="left" style="font-style: italic">
+                    <h:outputText
+                            value="Ang buhay ay parang gulong na paikot-ikot: minsan ikaw ay nasa itaas, at minsan ay nasa ilalim. ___(1)___ ika’y masipag at magaling, kung minsan ay talagang minamalas. Minsan naman, ___(2)___ ang mga biyayang dumarating kahit na hindi ka gaanong masikap. Ngunit kahit ano pa man ang mangyari, responsibilidad natin na gawing ___(3)___ ang ating buhay."/>
+                </div>
+            </f:facet>
+
+            <h:outputText value="#{qlp5.question}" escape="false" style="margin: 10px"/>
+            <p:selectOneRadio id="choiceId" value="#{examController.sampleMap[qlp5.id]}"
+                              layout="pageDirection" rendered="#{qlp5.questionType == 'MC'}" style="margin: 5px"
+                              required="true">
+                <f:selectItems value="#{examController.loadChoices(qlp5.id)}" var="c" itemLabel="#{c}"
+                               itemValue="value_#{examController.loadChoices(qlp5.id).indexOf(c)+1}"/>
+            </p:selectOneRadio>
+            <p:outputPanel rendered="#{qlp5.questionType == 'ID'}" style="margin: 10px">
+                <h:outputText for="idenId" value="Answer: "/>
+                <p:inputText id="idenId" value="#{examController.sampleMap[qlp5.id]}" required="true"/>
+            </p:outputPanel>
+        </p:dataList>
+
+        <p:divider><h3>READING COMPREHENSION</h3></p:divider>
+
+        <p:dataList var="qrc" value="#{examController.loadSubject('READING COMPREHENSION').questions}"
+                    type="ordered"
+                    rowIndexVar="index">
+            <f:facet name="header" style="text-align: right">
+                Instructions: Read the following passages and answer based on these passages
+                <br/><br/>
+                <div align="justify" style="font-style: italic">
+                    <h:outputText
+                            value="&emsp;&emsp;A Texas jury found a man guilty of assault for shooting his girlfriend because he thought she was about to say the words “New Jersey”. His lawyer unsuccessfully sought his exoneration on grounds that certain words set off an uncontrollable rage in the man. Words that triggered a bad reaction in the defendant included “New Jersey”, “Wisconsin”, and “Snickers” and “Mars”, the lawyer told the court."/>
+                    <br/>
+                    <h:outputText
+                            value="&emsp;&emsp;Throughout the three-day trial, the 54-year-old man covered his ears when he thought the words were going to be spoken. Witnesses used flashcards with the words written out instead of saying them in court. “When he has one of these episodes, he isn’t focused,” his lawyer said."/>
+                    <br/>
+                    <h:outputText
+                            value="&emsp;&emsp;Prosecutors said the man was troubled but not crazy. He was convicted for shooting his girlfriend three times on March 19, 1999, when he believed she was about to utter the words “New Jersey”. She survived the attack but died from unrelated causes just before the trial."/>
+                    <br/>
+                    <h:outputText
+                            value="&emsp;&emsp;In a statement, the man told police: “I had seen that word at my mom’s house and then Barbara said what she said, and I just snapped.”"/>
+                    <br/>
+                    <div align="right">
+                        <h:outputText value="- Reuters"/>
+                    </div>
+
+                </div>
+            </f:facet>
+
+            <h:outputText value="#{qrc.question}" escape="false" style="margin: 10px"/>
+            <p:selectOneRadio id="choiceId" value="#{examController.sampleMap[qrc.id]}"
+                              layout="pageDirection" rendered="#{qrc.questionType == 'MC'}" style="margin: 5px"
+                              required="true">
+                <f:selectItems value="#{examController.loadChoices(qrc.id)}" var="c" itemLabel="#{c}"
+                               itemValue="value_#{examController.loadChoices(qrc.id).indexOf(c)+1}"/>
+            </p:selectOneRadio>
+            <p:outputPanel rendered="#{qrc.questionType == 'ID'}" style="margin: 10px">
+                <h:outputText for="idenId" value="Answer: "/>
+                <p:inputText id="idenId" value="#{examController.sampleMap[qrc.id]}" required="true"/>
+            </p:outputPanel>
+        </p:dataList>
+
+        <p:divider/>
+
+        <div align="center">
+            <p:commandButton id="submitAnswersBtn" action="#{examController.check}" value="SUBMIT ANSWERS"
+                             update="examForm"/>
+        </div>
+    </h:form>
+</h:body>
+</html>

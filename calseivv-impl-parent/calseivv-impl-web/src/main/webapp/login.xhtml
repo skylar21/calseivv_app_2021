@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Login to CalSEIVV</title>
+    <link rel="stylesheet" href="resources/css/style.css" type="text/css"/>
+    <link rel="icon" href="resources/images/icon.png" type="image/icon type"/>
+</h:head>
+
+<h:body>
+    <center>
+        <h:form id="loginForm">
+            <p:growl id="msg" showDetail="true" life="3000"/>
+            <img src="resources/images/logo.svg" alt="CalSEIVV" height="210px" width="210px"/>
+            <p:panel header="Login" style="width: 360px;">
+                <h:panelGrid id="loginPanel" columns="2">
+                    <h:outputText value="Username: " style="margin: 10px"/>
+                    <p:inputText id="username" value="#{loginController.loginRequest.username}"></p:inputText>
+                    <p:spacer></p:spacer>
+                    <p:message for="username"></p:message>
+                    <h:outputText value="Password: " style="margin: 10px"/>
+                    <p:password id="password" value="#{loginController.loginRequest.password}"
+                                feedback="false"></p:password>
+                    <p:message for="password"></p:message>
+                </h:panelGrid>
+                <p:commandButton action="#{loginController.userLogin}" value="Login"
+                                 update="loginForm"></p:commandButton>
+            </p:panel>
+            <p style="font-family:'Segoe UI'">No account yet?
+                <h:link value="Register" outcome="/registration.jsf"/>
+            </p>
+            <p style="font-family:'Segoe UI'">
+                <h:link value="Forgot Password" outcome="/forget.jsf"/>
+            </p>
+        </h:form>
+    </center>
+    <div class="footer">
+        <p style="font-family:'Segoe UI'">© 2021 Calamba City Science High School</p>
+    </div>
+</h:body>
+
+</html>

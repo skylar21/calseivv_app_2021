@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Forget Password</title>
+    <link rel=" stylesheet" href="resources/css/style.css" type="text/css"/>
+    <link rel="icon" href="resources/images/icon.png" type="image/icon type"/>
+    <script src="resources/script/script.js"></script>
+</h:head>
+
+<h:body>
+    <center>
+        <h:form id="passwordForm">
+            <p:growl id="msg" showDetail="true" life="3000"/>
+            <img src="resources/images/logo.svg" alt="CalSEIVV" height="210px" width="210px"/>
+            <p:panel header="Forgot Password" style="width: 500px;">
+                <p:wizard id="forgetPassWizard" flowListener="#{passwordController.onFlowProcess}" widgetVar="wiz"
+                          onnext="hideBackOnLastTab()">
+                    <p:tab id="userInput" title="Step 1">
+                        <p:card style="margin: 10px">
+                            <h:panelGrid id="fUsername" columns="2" style="width: 100%">
+                                <h:outputText for="usernameInput" value="Enter your Username: "/>
+                                <p:inputText id="usernameInput"
+                                             value="#{passwordController.secretQuestionRequest.username}"
+                                             required="true"/>
+                            </h:panelGrid>
+                        </p:card>
+                    </p:tab>
+                    <p:tab id="secretInput" title="Step 2">
+                        <p:card style="margin: 10px">
+                            <p>
+                                #{passwordController.secretQuestionResponse.secretQuestion}
+                            </p>
+                            <h:panelGrid id="fSecretQuestion" columns="2" style="width: 100%">
+                                <h:outputText for="secretAnswerInput" value="Enter your Answer: "/>
+                                <p:inputText id="secretAnswerInput"
+                                             value="#{passwordController.secretAnswer}"/>
+                            </h:panelGrid>
+                        </p:card>
+                    </p:tab>
+                    <p:tab id="updateInput" title="Step 3">
+                        <p:card style="margin: 10px">
+                            <h:panelGrid id="fUpdatePassword" columns="2" style="width: 100%; margin-bottom: 10px">
+                                <h:outputText for="passwordInput1" value="New Password: "/>
+                                <p:password id="passwordInput1" value="#{passwordController.passwordRequest.password}"
+                                            match="passwordInput2" label="Password"
+                                            required="true"/>
+                                <h:outputText for="passwordInput2" value="Re-enter Password: "/>
+                                <p:password id="passwordInput2" value="#{passwordController.passwordRequest.password}"
+                                            required="true" label="Re-entered Password"/>
+                            </h:panelGrid>
+                            <p:commandButton value="Submit" action="#{passwordController.updatePassword}"
+                                             update="passwordForm"/>
+                        </p:card>
+
+                    </p:tab>
+                </p:wizard>
+            </p:panel>
+            <p style="font-family:'Segoe UI'">
+                <h:link value="Home" outcome="/login.jsf"/>
+            </p>
+        </h:form>
+    </center>
+    <div class="footer">
+        <p style="font-family:'Segoe UI'">© 2021 Calamba City Science High School</p>
+    </div>
+</h:body>
+
+</html>

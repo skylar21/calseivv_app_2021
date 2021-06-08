@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Home</title>
+    <link rel="stylesheet" href="../resources/css/style.css" type="text/css"/>
+    <link rel="icon" href="../resources/images/icon.png" type="image/icon type"/>
+</h:head>
+
+<h:body>
+    <f:event type="preRenderView" listener="#{homeController.display}"/>
+    <h:form id="homeForm">
+        <p:toolbar>
+            <p:toolbarGroup>
+                <p:graphicImage name="images/logo.svg" height="70px" width="150px"/>
+            </p:toolbarGroup>
+            <p:toolbarGroup>
+                <p:commandButton action="#{loginController.userLogout}" value="Logout"
+                                 style="margin-left: 20px;"></p:commandButton>
+            </p:toolbarGroup>
+        </p:toolbar>
+        <br/>
+        <p:panel header="User Profile">
+            <h:panelGrid id="loginPanel" columns="2" columnClasses="col1, col2">
+                <p:card style="height: 100%">
+                    <f:facet name="title">
+                        #{homeController.userResponse.userInfo.firstName}
+                        #{homeController.userResponse.userInfo.lastName}
+                        <p:button value="Verified" styleClass="ui-button-success ui-button-flat"
+                                  rendered="#{homeController.userResponse.userInfo.verified}"
+                                  disabled="true"/>
+                        <p:button value="Not Verified" styleClass="ui-button-warning ui-button-flat"
+                                  rendered="#{not homeController.userResponse.userInfo.verified}"
+                                  disabled="true"/>
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        #{homeController.displayRole}
+                    </f:facet>
+                    <p:graphicImage name="demo/images/#{homeController.userResponse.contentInfo.portrait}.jpeg"
+                                    rendered="#{not empty homeController.userResponse.contentInfo}"/>
+
+                </p:card>
+                <p:card rendered="#{homeController.displayExam}">
+                    <p:card>
+                        <f:facet name="title">
+                            Exam Status
+                        </f:facet>
+                        <h:outputText value=" You have completed the exam"
+                                      rendered="#{homeController.displayScore and homeController.userVerified}"/>
+                        <h:outputText value=" You have not taken the exam"
+                                      rendered="#{not homeController.displayScore and homeController.userVerified}"/>
+                        <h:outputText value=" You cannot take the exam unless verified"
+                                      rendered="#{not homeController.userVerified}"/>
+                        <br/><br/>
+                        <p:button value="Take Exam" outcome="/secured/exam.jsf?faces-redirect=true"
+                                  rendered="#{homeController.userVerified and not homeController.displayScore}"/>
+                    </p:card>
+                    <p:card rendered="#{homeController.displayScore}">
+                        <f:facet name="title">
+                            Exam Score
+                        </f:facet>
+                        <h:panelGrid columns="4" style="width:100%">
+                            <p:card>
+                                <f:facet name="subtitle">
+                                    Science
+                                </f:facet>
+                                <div align="center">
+                                    <p:knob id="sc" value="#{homeController.scoreResponse.score.science}" max="20"
+                                            disabled="true" height="100px;"
+                                            foregroundColor="green"/>
+                                </div>
+                            </p:card>
+                            <p:card>
+                                <f:facet name="subtitle">
+                                    Mathematics
+                                </f:facet>
+                                <div align="center">
+                                    <p:knob id="mt" value="#{homeController.scoreResponse.score.mathematics}" max="10"
+                                            disabled="true" height="100px;"
+                                            foregroundColor="blue"/>
+                                </div>
+                            </p:card>
+                            <p:card>
+                                <f:facet name="subtitle">
+                                    Language Proficiency
+                                </f:facet>
+                                <div align="center">
+                                    <p:knob id="lp" value="#{homeController.scoreResponse.score.languageProficiency}"
+                                            max="17" disabled="true" height="100px;"
+                                            foregroundColor="orange"/>
+                                </div>
+                            </p:card>
+                            <p:card>
+                                <f:facet name="subtitle">
+                                    Reading Comprehension
+                                </f:facet>
+                                <div align="center">
+                                    <p:knob id="rc" value="#{homeController.scoreResponse.score.readingComprehension}"
+                                            max="3" disabled="true" height="100px;"
+                                            foregroundColor="purple"/>
+                                </div>
+                            </p:card>
+                        </h:panelGrid>
+                        <p:card>
+                            <f:facet name="subtitle">
+                                <b>OVERALL</b>
+                            </f:facet>
+                            <div align="center">
+                                <p:knob id="ov" value="#{homeController.scoreResponse.score.overallScore}" max="50"
+                                        disabled="true" height="100px;"/>
+                            </div>
+                        </p:card>
+                    </p:card>
+                </p:card>
+                <p:card rendered="#{homeController.displayUsers}">
+                    <p:dataTable id="studentList" var="stud" value="#{homeController.userResponseList.userList}"
+                                 rows="5"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                 rowsPerPageTemplate="5,10,{ShowAll|'All'}" sortMode="single">
+                        <f:facet name="header">
+                            Examinee List
+                        </f:facet>
+                        <p:column sortBy="#{stud.lastName}" headerText="Last Name" sortOrder="asc">
+                            <h:outputText value="#{stud.lastName}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{stud.firstName}" headerText="First Name">
+                            <h:outputText value="#{stud.firstName}"/>
+                        </p:column>
+
+                        <p:column headerText="Application ID">
+                            <h:outputText value="#{stud.applicationId}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{stud.verified}" headerText="Verified">
+                            <p:button value="Verified" styleClass="rounded-button ui-button-success"
+                                      rendered="#{stud.verified}" disabled="true"/>
+                            <p:button value="Not Verified" styleClass="rounded-button ui-button-warning"
+                                      rendered="#{not stud.verified}" disabled="true"/>
+                        </p:column>
+
+                        <p:column headerText="Actions">
+                            <p:dialog id="userInfoDialog" header="User Info" widgetVar="dlg1" showEffect="fade"
+                                      modal="true" width="1000px" height="500px">
+                                <p:panelGrid columns="2">
+                                    <p:panelGrid columns="2">
+                                        <f:facet name="header">
+                                            <p:graphicImage
+                                                    name="demo/images/#{homeController.userView.contentInfo.portrait}.jpeg"
+                                                    rendered="#{not empty homeController.userResponse.contentInfo}"
+                                                    height="200px"/>
+                                        </f:facet>
+                                        <h:outputText value="Name:"/>
+                                        <h:outputText
+                                                value="#{homeController.userView.userInfo.lastName}, #{homeController.userView.userInfo.firstName} #{homeController.userView.userInfo.middleName}"/>
+
+                                        <h:outputText value="Birthdate:"/>
+                                        <h:outputText value="#{homeController.userView.userInfo.birthdate}">
+                                            <f:convertDateTime pattern="yyyy-dd-MM"/>
+                                        </h:outputText>
+
+                                        <h:outputText value="Application ID:"/>
+                                        <h:outputText value="#{homeController.userView.userInfo.applicationId}"/>
+
+                                        <h:outputText value="Taken the Examination?"/>
+                                        <p:button icon="pi pi-check" styleClass="rounded-button ui-button-flat"
+                                                  rendered="#{homeController.userView.userInfo.takenExam}"
+                                                  disabled="true"/>
+                                        <p:button icon="pi pi-times"
+                                                  styleClass="rounded-button ui-button-danger ui-button-flat"
+                                                  rendered="#{not homeController.userView.userInfo.takenExam}"
+                                                  disabled="true"/>
+
+                                    </p:panelGrid>
+
+                                    <p:card>
+                                        <f:facet name="subtitle">
+                                            Identification
+                                        </f:facet>
+                                        <div style="text-align: center;">
+                                            <p:graphicImage
+                                                    name="demo/ids/#{homeController.userView.contentInfo.identification}"
+                                                    rendered="#{not empty homeController.userResponse.contentInfo}"
+                                                    height="200px"/>
+
+                                            <div style="margin-top: 10px;">
+                                                <p:commandButton action="#{homeController.verify(stud.id)}"
+                                                                 value="Verify Examinee"
+                                                                 icon="pi pi-check"
+                                                                 update="studentList"
+                                                                 rendered="#{not homeController.userView.userInfo.verified}"/>
+                                            </div>
+                                        </div>
+                                    </p:card>
+
+                                </p:panelGrid>
+
+
+                            </p:dialog>
+                            <p:commandButton value="View" oncomplete="PF('dlg1').show()"
+                                             action="#{homeController.viewUserInfo(stud.id)}"
+                                             update="userInfoDialog"
+                                             icon="pi pi-eye"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:card>
+            </h:panelGrid>
+        </p:panel>
+
+    </h:form>
+
+    <div class="footer">
+        <p>© 2021 Calamba City Science High School</p>
+    </div>
+
+</h:body>
+</html>
