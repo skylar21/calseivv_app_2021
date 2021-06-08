@@ -11,6 +11,7 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
+import javax.faces.application.ProjectStage;
 import javax.faces.webapp.FacesServlet;
 import javax.servlet.DispatcherType;
 import javax.servlet.ServletContext;
@@ -31,6 +32,7 @@ public class Application {
     public ServletRegistrationBean servletRegistrationBean(ServletContext servletContext) {
         servletContext.setInitParameter("com.sun.faces.forceLoadConfiguration", Boolean.TRUE.toString());
         servletContext.setInitParameter("primefaces.UPLOADER", "commons");
+        servletContext.setInitParameter(ProjectStage.PROJECT_STAGE_PARAM_NAME, ProjectStage.Production.name());
         FacesServlet servlet = new FacesServlet();
         return new ServletRegistrationBean(servlet, "*.jsf");
     }
