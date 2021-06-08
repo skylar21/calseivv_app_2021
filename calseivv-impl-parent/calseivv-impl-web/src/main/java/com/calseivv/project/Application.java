@@ -49,7 +49,7 @@ public class Application {
         rwFilter.setDispatcherTypes(EnumSet.of(DispatcherType.FORWARD, DispatcherType.REQUEST,
                 DispatcherType.ASYNC, DispatcherType.ERROR));
         rwFilter.setFilter(new AuthenticationFilter());
-        rwFilter.addUrlPatterns("*.jsf");
+        rwFilter.addUrlPatterns("/*");
         return rwFilter;
     }
 
