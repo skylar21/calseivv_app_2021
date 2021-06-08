@@ -39,7 +39,7 @@ public class AuthenticationFilter implements Filter {
                     || reqURI.contains("javax.faces.resource")) {
                 chain.doFilter(request, response);
             } else {
-                res.sendRedirect(req.getContextPath() + "/login.jsf"); // Anonymous user. Redirect to login page
+                res.sendRedirect("/login.jsf"); // Anonymous user. Redirect to login page
             }
         } catch (Exception t) {
             t.printStackTrace();
