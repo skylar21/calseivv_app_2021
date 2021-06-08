@@ -51,7 +51,7 @@ public class Application {
 //                DispatcherType.ASYNC, DispatcherType.ERROR));
         FilterRegistrationBean rwFilter = new FilterRegistrationBean(new AuthenticationFilter());
 //        rwFilter.setFilter();
-        rwFilter.addUrlPatterns("/*");
+//        rwFilter.addUrlPatterns("*");
         return rwFilter;
     }
 
