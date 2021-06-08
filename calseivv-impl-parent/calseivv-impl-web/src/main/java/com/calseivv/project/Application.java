@@ -45,12 +45,10 @@ public class Application {
 
     @Bean
     public FilterRegistrationBean rewriteFilter() {
-//        FilterRegistrationBean rwFilter = new FilterRegistrationBean(new RewriteFilter());
-//        FilterRegistrationBean fileFilter = new FilterRegistrationBean(new FileUploadFilter());
-//        rwFilter.setDispatcherTypes(EnumSet.of(DispatcherType.FORWARD, DispatcherType.REQUEST,
-//                DispatcherType.ASYNC, DispatcherType.ERROR));
-        FilterRegistrationBean rwFilter = new FilterRegistrationBean(new AuthenticationFilter());
-//        rwFilter.setFilter();
+        FilterRegistrationBean rwFilter = new FilterRegistrationBean(new RewriteFilter());
+        rwFilter.setDispatcherTypes(EnumSet.of(DispatcherType.FORWARD, DispatcherType.REQUEST,
+                DispatcherType.ASYNC, DispatcherType.ERROR));
+        rwFilter.setFilter(new AuthenticationFilter());
         rwFilter.addUrlPatterns("*.jsf");
         return rwFilter;
     }
