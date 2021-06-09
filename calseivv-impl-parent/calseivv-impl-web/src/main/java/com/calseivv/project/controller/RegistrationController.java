@@ -89,7 +89,7 @@ public class RegistrationController {
 
         //store file
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        String newFileName = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "demo" +
+        String newFileName = "resources" + File.separator + "demo" +
                 File.separator + "ids" + File.separator + filenamePath;
 
         byte[] data = file.getContent();
@@ -97,7 +97,7 @@ public class RegistrationController {
 
         try {
             if (uploadedIdFilename != null) {
-                String checkFilename = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "demo" +
+                String checkFilename = "resources" + File.separator + "demo" +
                         File.separator + "ids" + File.separator + uploadedIdFilename;
                 File checkFile = new File(checkFilename);
                 checkFile.delete();
@@ -138,7 +138,7 @@ public class RegistrationController {
         byte[] data = captureEvent.getData();
 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        String newFileName = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "demo" +
+        String newFileName = "resources" + File.separator + "demo" +
                 File.separator + "images" + File.separator + captureFilename + ".jpeg";
 
         FileImageOutputStream imageOutput;
@@ -157,7 +157,7 @@ public class RegistrationController {
     private void deletePhoto() {
 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        String toDelete = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "demo" +
+        String toDelete = "resources" + File.separator + "demo" +
                 File.separator + "images" + File.separator + captureFilename + ".jpeg";
 
         File file = new File(toDelete);

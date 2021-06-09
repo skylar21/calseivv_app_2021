@@ -40,8 +40,9 @@
                     <f:facet name="subtitle">
                         #{homeController.displayRole}
                     </f:facet>
-                    <p:graphicImage name="demo/images/#{homeController.userResponse.contentInfo.portrait}.jpeg"
-                                    rendered="#{not empty homeController.userResponse.contentInfo}"/>
+                    <p:graphicImage
+                            name="resources/demo/images/#{homeController.userResponse.contentInfo.portrait}.jpeg"
+                            rendered="#{not empty homeController.userResponse.contentInfo}"/>
 
                 </p:card>
                 <p:card rendered="#{homeController.displayExam}">
@@ -152,7 +153,7 @@
                                     <p:panelGrid columns="2">
                                         <f:facet name="header">
                                             <p:graphicImage
-                                                    name="demo/images/#{homeController.userView.contentInfo.portrait}.jpeg"
+                                                    name="resources/demo/images/#{homeController.userView.contentInfo.portrait}.jpeg"
                                                     rendered="#{not empty homeController.userResponse.contentInfo}"
                                                     height="200px"/>
                                         </f:facet>
@@ -185,7 +186,7 @@
                                         </f:facet>
                                         <div style="text-align: center;">
                                             <p:graphicImage
-                                                    name="demo/ids/#{homeController.userView.contentInfo.identification}"
+                                                    name="resources/demo/ids/#{homeController.userView.contentInfo.identification}"
                                                     rendered="#{not empty homeController.userResponse.contentInfo}"
                                                     height="200px"/>
 
