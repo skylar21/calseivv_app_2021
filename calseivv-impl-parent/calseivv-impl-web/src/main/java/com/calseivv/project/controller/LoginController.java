@@ -4,8 +4,6 @@ import com.calseivv.project.request.LoginRequest;
 import com.calseivv.project.response.LoginResponse;
 import com.calseivv.project.service.LoginService;
 import com.calseivv.project.util.SessionUtils;
-import org.ocpsoft.rewrite.annotation.Join;
-import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -18,8 +16,6 @@ import java.io.Serializable;
 
 @SessionScope
 @Component(value = "loginController")
-@ELBeanName(value = "loginController")
-@Join(path = "/", to = "/login.jsf")
 public class LoginController implements Serializable {
 
     @Autowired

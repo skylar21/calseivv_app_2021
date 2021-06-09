@@ -7,7 +7,6 @@ import com.calseivv.project.response.RegistrationResponse;
 import com.calseivv.project.service.QuestionService;
 import com.calseivv.project.service.RegistrationService;
 import com.captcha.botdetect.web.jsf.JsfCaptcha;
-import org.ocpsoft.rewrite.el.ELBeanName;
 import org.primefaces.event.CaptureEvent;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
@@ -27,7 +26,6 @@ import java.util.Date;
 
 @SessionScope
 @Component(value = "registrationController")
-@ELBeanName(value = "registrationController")
 public class RegistrationController {
 
     @Autowired

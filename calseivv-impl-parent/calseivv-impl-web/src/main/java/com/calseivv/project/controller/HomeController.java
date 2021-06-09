@@ -7,7 +7,6 @@ import com.calseivv.project.response.GetScoreResponse;
 import com.calseivv.project.response.GetUserResponse;
 import com.calseivv.project.service.UserService;
 import com.calseivv.project.util.SessionUtils;
-import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -16,7 +15,6 @@ import java.util.UUID;
 
 @SessionScope
 @Component(value = "homeController")
-@ELBeanName(value = "homeController")
 public class HomeController {
 
     @Autowired

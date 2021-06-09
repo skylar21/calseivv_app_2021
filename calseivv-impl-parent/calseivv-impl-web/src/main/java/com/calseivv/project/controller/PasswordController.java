@@ -3,7 +3,6 @@ package com.calseivv.project.controller;
 import com.calseivv.project.request.PasswordRequest;
 import com.calseivv.project.response.PasswordResponse;
 import com.calseivv.project.service.UserService;
-import org.ocpsoft.rewrite.el.ELBeanName;
 import org.primefaces.event.FlowEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,7 +15,6 @@ import java.io.IOException;
 
 @SessionScope
 @Component(value = "passwordController")
-@ELBeanName(value = "passwordController")
 public class PasswordController {
 
     @Autowired

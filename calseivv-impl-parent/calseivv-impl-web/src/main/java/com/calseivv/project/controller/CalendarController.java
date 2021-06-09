@@ -1,6 +1,5 @@
 package com.calseivv.project.controller;
 
-import org.ocpsoft.rewrite.el.ELBeanName;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 import org.springframework.stereotype.Component;
@@ -14,7 +13,6 @@ import java.util.List;
 
 @ViewScoped
 @Component(value = "calendarController")
-@ELBeanName(value = "calendarController")
 public class CalendarController {
 
     private Date date;

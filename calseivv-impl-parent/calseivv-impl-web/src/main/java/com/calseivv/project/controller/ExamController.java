@@ -9,7 +9,6 @@ import com.calseivv.project.service.QuestionService;
 import com.calseivv.project.service.UserService;
 import com.calseivv.project.util.SessionUtils;
 import org.apache.commons.collections4.MultiValuedMap;
-import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -24,7 +23,6 @@ import java.util.stream.Collectors;
 
 @SessionScope
 @Component(value = "examController")
-@ELBeanName(value = "examController")
 public class ExamController {
 
     @Autowired

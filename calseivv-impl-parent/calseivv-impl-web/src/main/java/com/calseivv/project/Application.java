@@ -2,7 +2,6 @@ package com.calseivv.project;
 
 import com.calseivv.project.security.AuthenticationFilter;
 import com.captcha.botdetect.web.servlet.CaptchaServlet;
-import org.ocpsoft.rewrite.servlet.RewriteFilter;
 import org.primefaces.webapp.filter.FileUploadFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -43,11 +42,9 @@ public class Application {
 
     @Bean
     public FilterRegistrationBean rewriteFilter() {
-        FilterRegistrationBean rwFilter = new FilterRegistrationBean(new RewriteFilter());
-        FilterRegistrationBean fileFilter = new FilterRegistrationBean(new FileUploadFilter());
+        FilterRegistrationBean rwFilter = new FilterRegistrationBean(new AuthenticationFilter());
         rwFilter.setDispatcherTypes(EnumSet.of(DispatcherType.FORWARD, DispatcherType.REQUEST,
                 DispatcherType.ASYNC, DispatcherType.ERROR));
-        rwFilter.setFilter(new AuthenticationFilter());
         rwFilter.addUrlPatterns("/*");
         return rwFilter;
     }
