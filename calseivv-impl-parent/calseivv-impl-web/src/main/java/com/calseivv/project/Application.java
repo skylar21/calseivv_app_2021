@@ -5,8 +5,11 @@ import com.captcha.botdetect.web.servlet.CaptchaServlet;
 import org.primefaces.webapp.filter.FileUploadFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -53,6 +56,11 @@ public class Application {
     public FilterRegistrationBean fileFilter() {
         FilterRegistrationBean fileFilter = new FilterRegistrationBean(new FileUploadFilter());
         return fileFilter;
+    }
+
+    @Bean
+    public com.sun.faces.config.ConfigureListener mojarraConfigureListener() {
+        return new com.sun.faces.config.ConfigureListener();
     }
 
 }

@@ -1,0 +1,1 @@
+web: java -jar calseivv-impl-web/target/calseivv-impl-web-1.0.0.war

@@ -89,7 +89,7 @@ public class RegistrationController {
 
         //store file
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        String newFileName = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "demo" +
+        String newFileName = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "resources/demo" +
                 File.separator + "ids" + File.separator + filenamePath;
 
         byte[] data = file.getContent();
@@ -97,7 +97,7 @@ public class RegistrationController {
 
         try {
             if (uploadedIdFilename != null) {
-                String checkFilename = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "demo" +
+                String checkFilename = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "resources/demo" +
                         File.separator + "ids" + File.separator + uploadedIdFilename;
                 File checkFile = new File(checkFilename);
                 checkFile.delete();
@@ -138,8 +138,8 @@ public class RegistrationController {
         byte[] data = captureEvent.getData();
 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        String newFileName = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "demo" +
-                File.separator + "images" + File.separator + captureFilename + ".jpeg";
+        String newFileName = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "resources/demo" +
+                File.separator + "resources/images" + File.separator + captureFilename + ".jpeg";
 
         FileImageOutputStream imageOutput;
         try {
@@ -157,8 +157,8 @@ public class RegistrationController {
     private void deletePhoto() {
 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        String toDelete = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "demo" +
-                File.separator + "images" + File.separator + captureFilename + ".jpeg";
+        String toDelete = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "resources/demo" +
+                File.separator + "resources/images" + File.separator + captureFilename + ".jpeg";
 
         File file = new File(toDelete);
         file.delete();
