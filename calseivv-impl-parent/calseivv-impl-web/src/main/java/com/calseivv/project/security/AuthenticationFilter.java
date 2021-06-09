@@ -41,6 +41,7 @@ public class AuthenticationFilter implements Filter {
                     || reqURI.contains("javax.faces.resource")) {
                 chain.doFilter(request, response);
             } else {
+                System.out.println("Redirecting to Login...");
                 res.sendRedirect(req.getContextPath() + "/login.jsf"); // Anonymous user. Redirect to login page
             }
         } catch (Throwable t) {
