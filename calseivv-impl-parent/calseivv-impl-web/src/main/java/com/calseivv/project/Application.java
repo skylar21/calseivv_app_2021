@@ -45,11 +45,12 @@ public class Application {
 
     @Bean
     public FilterRegistrationBean rewriteFilter() {
-        FilterRegistrationBean rwFilter = new FilterRegistrationBean(new RewriteFilter());
-        rwFilter.setDispatcherTypes(EnumSet.of(DispatcherType.FORWARD, DispatcherType.REQUEST,
-                DispatcherType.ASYNC, DispatcherType.ERROR));
-        rwFilter.setFilter(new AuthenticationFilter());
-        rwFilter.addUrlPatterns("/*");
+//        FilterRegistrationBean rwFilter = new FilterRegistrationBean(new RewriteFilter());
+//        rwFilter.setDispatcherTypes(EnumSet.of(DispatcherType.FORWARD, DispatcherType.REQUEST,
+//                DispatcherType.ASYNC, DispatcherType.ERROR));
+//        rwFilter.setFilter(new AuthenticationFilter());
+//        rwFilter.addUrlPatterns("/*");
+        FilterRegistrationBean rwFilter = new FilterRegistrationBean(new AuthenticationFilter());
         return rwFilter;
     }
 
