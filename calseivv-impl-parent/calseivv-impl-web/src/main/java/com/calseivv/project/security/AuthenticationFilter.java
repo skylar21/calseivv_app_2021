@@ -37,7 +37,7 @@ public class AuthenticationFilter implements Filter {
             if (reqURI.indexOf("/login.jsf") >= 0 || reqURI.indexOf("/registration.jsf") >= 0 || reqURI.indexOf("/public/") >= 0
                     || reqURI.indexOf("/resources/css/") >= 0 || reqURI.indexOf("/resources/images/") >= 0 || reqURI.indexOf("/resources/script/") >= 0
                     || reqURI.indexOf("/forget.jsf") >= 0 || reqURI.indexOf("/botdetectcaptcha") >= 0
-                    || (ses != null && ses.getAttribute("username") != null)
+                    || (ses != null && ses.getAttribute("username") != null) || reqURI.contains("favicon")
                     || reqURI.contains("javax.faces.resource")) {
                 chain.doFilter(request, response);
             } else {
