@@ -48,7 +48,7 @@ public class Application {
         FilterRegistrationBean rwFilter = new FilterRegistrationBean(new AuthenticationFilter());
         rwFilter.setDispatcherTypes(EnumSet.of(DispatcherType.FORWARD, DispatcherType.REQUEST,
                 DispatcherType.ASYNC, DispatcherType.ERROR));
-        rwFilter.addUrlPatterns("*.jsf");
+        rwFilter.addUrlPatterns("/*");
         return rwFilter;
     }
 
