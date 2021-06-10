@@ -119,28 +119,33 @@
                     <f:facet name="subtitle">
                         Allow camera access to take your photo.
                     </f:facet>
-                    <p:outputPanel id="photo" style="text-align: center;">
-                        <p:graphicImage name="resources/demo/images/#{registrationController.captureFilename}.jpeg"
-                                        rendered="#{not empty registrationController.captureFilename}"
+                    <p:outputPanel id="photo" style="text-align: center;" autoUpdate="true">
+                        <p:graphicImage value="#{registrationController.portraitPreview}"
+                                        rendered="#{registrationController.portraitPreview != null}"
                                         height="130px"/>
                     </p:outputPanel>
-                    <p:dialog header=" Capture Face Photo
-                            " widgetVar="dlg1" minHeight="40" showEffect="fade">
+                    <p:dialog header="Capture Face Photo" widgetVar="dlg1" minHeight="40" showEffect="fade">
                         <h:panelGrid cellpadding="5">
                             <p:photoCam widgetVar="pc" listener="#{registrationController.oncapture}"
                                         update="photo"/>
                         </h:panelGrid>
-                        <center>
-                            <p:commandButton type="button" value="Capture"
+                        <div align="center">
+                            <p:commandButton type="button" value="Capture Photo"
                                              onclick="PF('pc').capture(); PF('dlg1').hide();"
                                              icon="pi pi-camera"/>
-                        </center>
+                        </div>
 
                     </p:dialog>
-                    <center>
-                        <p:commandButton value="Capture" type="button" icon="pi pi-external-link"
-                                         onclick="PF('dlg1').show()" style="margin-top: 10px"/>
-                    </center>
+                    <div align="center">
+                        <h:panelGrid columns="2">
+                            <p:commandButton value="Capture" type="button" icon="pi pi-external-link"
+                                             onclick="PF('dlg1').show()"/>
+                            <p:commandButton value="Clear" action="#{registrationController.clearCapturedPhoto}"
+                                             icon="pi pi-circle-off"
+                                             update="photo" process="@this"/>
+                        </h:panelGrid>
+                    </div>
+
 
                 </p:card>
 

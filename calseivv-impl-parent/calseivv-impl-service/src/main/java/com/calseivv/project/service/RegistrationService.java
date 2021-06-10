@@ -45,22 +45,23 @@ public class RegistrationService {
             userEntity.setSecretId(UUID.fromString(registerUserRequest.getSecretId()));
             userEntity.setTakenExam(false);
 
-            if (registerUserRequest.getPortraitFile().isEmpty()) {
+            if (registerUserRequest.getPortraitByte() == null) {
                 return buildResponseMessage("Missing Portrait Photo");
             }
 
-            if (registerUserRequest.getIdFile().isEmpty()) {
+            if (registerUserRequest.getIdentificationByte() == null) {
                 return buildResponseMessage("Missing ID");
             }
 
-            contentEntity.setPortrait(registerUserRequest.getPortraitFile());
-            contentEntity.setIdentification(registerUserRequest.getIdFile());
+            contentEntity.setPortraitByte(registerUserRequest.getPortraitByte());
+            contentEntity.setIdentificationByte(registerUserRequest.getIdentificationByte());
             contentEntity = contentRepository.save(contentEntity);
 
             userEntity.setContentId(contentEntity.getId());
             userEntity = userRepository.save(userEntity);
 
             return buildResponse(userEntity, contentEntity);
+            
         } catch (Exception e) {
             if (e instanceof DataIntegrityViolationException) {
                 if (e.getCause() instanceof ConstraintViolationException) {

@@ -3,14 +3,19 @@ package com.calseivv.project.controller;
 import com.calseivv.project.persistence.model.UserEntity;
 import com.calseivv.project.persistence.model.UserRoleEnum;
 import com.calseivv.project.request.GetUserRequest;
+import com.calseivv.project.response.GetContentResponse;
 import com.calseivv.project.response.GetScoreResponse;
 import com.calseivv.project.response.GetUserResponse;
+import com.calseivv.project.service.ContentService;
 import com.calseivv.project.service.UserService;
 import com.calseivv.project.util.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+import javax.faces.view.ViewScoped;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @SessionScope
@@ -20,11 +25,17 @@ public class HomeController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ContentService contentService;
+
     private GetUserRequest userRequest = new GetUserRequest();
     private GetUserResponse userResponse = new GetUserResponse();
     private GetUserResponse userResponseList = new GetUserResponse();
     private GetUserResponse userView = new GetUserResponse();
+    private GetContentResponse contentView = new GetContentResponse();
     private GetScoreResponse scoreResponse = new GetScoreResponse();
+    private GetContentResponse contentResponse = new GetContentResponse();
+    private GetContentResponse exContentResponse = new GetContentResponse();
 
     private boolean displayUsers = false;
     private boolean displayExam = false;
@@ -42,6 +53,9 @@ public class HomeController {
         userRequest.setUserId(userId);
         GetUserResponse response = userService.getUser(UUID.fromString(userRequest.getUserId()));
         userResponse.setUserInfo(response.getUserInfo());
+
+        contentResponse = contentService.getImage(userResponse.getUserInfo().getContentId());
+
         displayRole = UserRoleEnum.valueOf(userResponse.getUserInfo().getUserRole()).getUserRoleName();
         userVerified = userResponse.getUserInfo().isVerified();
 
@@ -99,9 +113,14 @@ public class HomeController {
         if (userResponse != null) {
             UserEntity user = userResponse.getUserInfo();
             if (user != null) {
-                GetUserResponse contentResponse = userService.getContent(user.getContentId());
-                userResponse.setContentInfo(contentResponse.getContentInfo());
+                if (user.getContentId() != null) {
+                    GetUserResponse contentResponse = userService.getContent(user.getContentId());
+                    GetContentResponse contentViewResponse = contentService.getImage(user.getContentId());
+                    userResponse.setContentInfo(contentResponse.getContentInfo());
+                    contentView = contentViewResponse;
+                }
                 userView = userResponse;
+
             }
         }
     }
@@ -137,6 +156,10 @@ public class HomeController {
 
     public GetUserResponse getUserView() {
         return userView;
+    }
+
+    public GetContentResponse getContentView() {
+        return contentView;
     }
 
     public String getDisplayRole() {
@@ -177,5 +200,21 @@ public class HomeController {
 
     public void setUserVerified(boolean userVerified) {
         this.userVerified = userVerified;
+    }
+
+    public GetContentResponse getContentResponse() {
+        return contentResponse;
+    }
+
+    public void setContentResponse(GetContentResponse contentResponse) {
+        this.contentResponse = contentResponse;
+    }
+
+    public GetContentResponse getExContentResponse() {
+        return exContentResponse;
+    }
+
+    public void setExContentResponse(GetContentResponse exContentResponse) {
+        this.exContentResponse = exContentResponse;
     }
 }

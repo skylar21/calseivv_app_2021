@@ -30,20 +30,25 @@
                     <f:facet name="title">
                         #{homeController.userResponse.userInfo.firstName}
                         #{homeController.userResponse.userInfo.lastName}
-                        <p:button value="Verified" styleClass="ui-button-success ui-button-flat"
-                                  rendered="#{homeController.userResponse.userInfo.verified}"
-                                  disabled="true"/>
-                        <p:button value="Not Verified" styleClass="ui-button-warning ui-button-flat"
-                                  rendered="#{not homeController.userResponse.userInfo.verified}"
-                                  disabled="true"/>
                     </f:facet>
                     <f:facet name="subtitle">
                         #{homeController.displayRole}
                     </f:facet>
-                    <p:graphicImage
-                            name="resources/demo/images/#{homeController.userResponse.contentInfo.portrait}.jpeg"
-                            rendered="#{not empty homeController.userResponse.contentInfo}"/>
 
+                    <div align="center">
+                        <p:graphicImage
+                                value="#{homeController.contentResponse.contentImagesMap['portrait']}"
+                                rendered="#{not empty homeController.contentResponse.contentImagesMap['portrait']}"
+                                height="150px" width="200px" cache="false"/>
+                        <p:graphicImage name="images/user_icon.svg" height="150px" width="200px" cache="false"
+                                        rendered="#{empty homeController.contentResponse.contentImagesMap['portrait']}"/>
+                        <p:button value="Verified" styleClass="ui-button-success ui-button-flat"
+                                  rendered="#{homeController.userResponse.userInfo.verified}"
+                                  disabled="true" alt="verified"/>
+                        <p:button value="Not Verified" styleClass="ui-button-warning ui-button-flat"
+                                  rendered="#{not homeController.userResponse.userInfo.verified}"
+                                  disabled="true"/>
+                    </div>
                 </p:card>
                 <p:card rendered="#{homeController.displayExam}">
                     <p:card>
@@ -153,9 +158,12 @@
                                     <p:panelGrid columns="2">
                                         <f:facet name="header">
                                             <p:graphicImage
-                                                    name="resources/demo/images/#{homeController.userView.contentInfo.portrait}.jpeg"
-                                                    rendered="#{not empty homeController.userResponse.contentInfo}"
-                                                    height="200px"/>
+                                                    value="#{homeController.contentView.contentImagesMap['portrait']}"
+                                                    rendered="#{not empty homeController.contentView.contentImagesMap['portrait']}"
+                                                    height="200px" cache="false"/>
+                                            <p:graphicImage name="images/user_icon.svg" height="150px" width="200px"
+                                                            cache="false"
+                                                            rendered="#{empty homeController.contentView.contentImagesMap['portrait']}"/>
                                         </f:facet>
                                         <h:outputText value="Name:"/>
                                         <h:outputText
@@ -186,9 +194,12 @@
                                         </f:facet>
                                         <div style="text-align: center;">
                                             <p:graphicImage
-                                                    name="resources/demo/ids/#{homeController.userView.contentInfo.identification}"
-                                                    rendered="#{not empty homeController.userResponse.contentInfo}"
-                                                    height="200px"/>
+                                                    value="#{homeController.contentView.contentImagesMap['identification']}"
+                                                    height="200px" rendered="#{not empty homeController.contentView}"
+                                                    cache="false"/>
+                                            <p:graphicImage name="images/user_icon.svg" height="150px" width="200px"
+                                                            cache="false"
+                                                            rendered="#{empty homeController.contentView.contentImagesMap['identification']}"/>
 
                                             <div style="margin-top: 10px;">
                                                 <p:commandButton action="#{homeController.verify(stud.id)}"

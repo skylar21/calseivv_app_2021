@@ -20,6 +20,8 @@ public class RegistrationRequest {
     private String secretAnswer;
     private String secretId;
     private boolean takenExam = false;
+    private byte[] portraitByte;
+    private byte[] identificationByte;
 
     public String getFirstName() {
         return firstName;
@@ -139,5 +141,21 @@ public class RegistrationRequest {
 
     public void setTakenExam(boolean takenExam) {
         this.takenExam = takenExam;
+    }
+
+    public byte[] getPortraitByte() {
+        return portraitByte;
+    }
+
+    public void setPortraitByte(byte[] portraitByte) {
+        this.portraitByte = portraitByte;
+    }
+
+    public byte[] getIdentificationByte() {
+        return identificationByte;
+    }
+
+    public void setIdentificationByte(byte[] identificationByte) {
+        this.identificationByte = identificationByte;
     }
 }

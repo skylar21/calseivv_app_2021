@@ -1,5 +1,6 @@
 package com.calseivv.project.persistence.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,22 +10,25 @@ public class ContentEntity extends UUIDBasedEntity {
 
     private static final long serialVersionUID = 5052889271724871130L;
 
-    private String identification;
-    private String portrait;
+    @Column(name = "portrait_byte")
+    private byte[] portraitByte;
 
-    public String getIdentification() {
-        return identification;
+    @Column(name = "identification_byte")
+    private byte[] identificationByte;
+
+    public byte[] getPortraitByte() {
+        return portraitByte;
     }
 
-    public void setIdentification(String identification) {
-        this.identification = identification;
+    public void setPortraitByte(byte[] portraitByte) {
+        this.portraitByte = portraitByte;
     }
 
-    public String getPortrait() {
-        return portrait;
+    public byte[] getIdentificationByte() {
+        return identificationByte;
     }
 
-    public void setPortrait(String portrait) {
-        this.portrait = portrait;
+    public void setIdentificationByte(byte[] identificationByte) {
+        this.identificationByte = identificationByte;
     }
 }
