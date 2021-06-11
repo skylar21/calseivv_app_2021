@@ -101,3 +101,19 @@ body .ui-fileupload-simple .ui-widget {
     width: 80%;
     vertical-align: top;
 }
+
+.firstColumn {
+    width: 10px;
+}
+.secondColumn {
+    width: 20px;
+}
+.thirdColumn {
+    width: 35px;
+}
+.fourthColumn {
+    width: 50px;
+}
+.fifthColumn {
+    width: 25px;
+}

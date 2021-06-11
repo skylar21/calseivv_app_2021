@@ -34,6 +34,7 @@ public class HomeController {
     private GetUserResponse userView = new GetUserResponse();
     private GetContentResponse contentView = new GetContentResponse();
     private GetScoreResponse scoreResponse = new GetScoreResponse();
+    private GetScoreResponse scoreViewResponse = new GetScoreResponse();
     private GetContentResponse contentResponse = new GetContentResponse();
     private GetContentResponse exContentResponse = new GetContentResponse();
 
@@ -119,8 +120,8 @@ public class HomeController {
                     userResponse.setContentInfo(contentResponse.getContentInfo());
                     contentView = contentViewResponse;
                 }
+                scoreViewResponse = userService.checkScore(userId);
                 userView = userResponse;
-
             }
         }
     }
@@ -216,5 +217,13 @@ public class HomeController {
 
     public void setExContentResponse(GetContentResponse exContentResponse) {
         this.exContentResponse = exContentResponse;
+    }
+
+    public GetScoreResponse getScoreViewResponse() {
+        return scoreViewResponse;
+    }
+
+    public void setScoreViewResponse(GetScoreResponse scoreViewResponse) {
+        this.scoreViewResponse = scoreViewResponse;
     }
 }

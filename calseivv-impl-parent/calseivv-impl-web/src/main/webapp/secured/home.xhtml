@@ -153,7 +153,7 @@
 
                         <p:column headerText="Actions">
                             <p:dialog id="userInfoDialog" header="User Info" widgetVar="dlg1" showEffect="fade"
-                                      modal="true" width="1000px" height="500px">
+                                      modal="true" width="1300px" height="550px">
                                 <p:panelGrid columns="2">
                                     <p:panelGrid columns="2">
                                         <f:facet name="header">
@@ -188,28 +188,55 @@
 
                                     </p:panelGrid>
 
-                                    <p:card>
-                                        <f:facet name="subtitle">
-                                            Identification
-                                        </f:facet>
-                                        <div style="text-align: center;">
-                                            <p:graphicImage
-                                                    value="#{homeController.contentView.contentImagesMap['identification']}"
-                                                    height="200px" rendered="#{not empty homeController.contentView}"
-                                                    cache="false"/>
-                                            <p:graphicImage name="images/user_icon.svg" height="150px" width="200px"
-                                                            cache="false"
-                                                            rendered="#{empty homeController.contentView.contentImagesMap['identification']}"/>
+                                    <p:panelGrid columns="1">
+                                        <p:card>
+                                            <f:facet name="subtitle">
+                                                Identification
+                                            </f:facet>
+                                            <div style="text-align: center;">
+                                                <p:graphicImage
+                                                        value="#{homeController.contentView.contentImagesMap['identification']}"
+                                                        height="200px"
+                                                        rendered="#{not empty homeController.contentView}"
+                                                        cache="false"/>
+                                                <p:graphicImage name="images/user_icon.svg" height="150px" width="200px"
+                                                                cache="false"
+                                                                rendered="#{empty homeController.contentView.contentImagesMap['identification']}"/>
 
-                                            <div style="margin-top: 10px;">
-                                                <p:commandButton action="#{homeController.verify(stud.id)}"
-                                                                 value="Verify Examinee"
-                                                                 icon="pi pi-check"
-                                                                 update="studentList"
-                                                                 rendered="#{not homeController.userView.userInfo.verified}"/>
+                                                <div style="margin-top: 10px;">
+                                                    <p:commandButton action="#{homeController.verify(stud.id)}"
+                                                                     value="Verify Examinee"
+                                                                     icon="pi pi-check"
+                                                                     update="studentList"
+                                                                     rendered="#{not homeController.userView.userInfo.verified}"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </p:card>
+                                        </p:card>
+
+                                        <p:panelGrid columns="5"
+                                                     rendered="#{homeController.userView.userInfo.takenExam}"
+                                                     style="text-align:center"
+                                                     columnClasses="firstColumn,secondColumn,thirdColumn,fourthColumn,fifthColumn">
+
+                                            <h:outputText value="Science" style="font-weight:bold"/>
+                                            <h:outputText value="Math" style="font-weight:bold"/>
+                                            <h:outputText value="Language Proficiency" style="font-weight:bold"/>
+                                            <h:outputText value="Reading Comprehension" style="font-weight:bold"/>
+                                            <h:outputText value="Overall Score" style="font-weight:bold"/>
+
+                                            <h:outputText
+                                                    value="#{homeController.scoreViewResponse.score.science}"/>
+                                            <h:outputText
+                                                    value="#{homeController.scoreViewResponse.score.mathematics}"/>
+                                            <h:outputText
+                                                    value="#{homeController.scoreViewResponse.score.languageProficiency}"/>
+                                            <h:outputText
+                                                    value="#{homeController.scoreViewResponse.score.readingComprehension}"/>
+                                            <h:outputText
+                                                    value="#{homeController.scoreViewResponse.score.overallScore}"/>
+
+                                        </p:panelGrid>
+                                    </p:panelGrid>
 
                                 </p:panelGrid>
 
