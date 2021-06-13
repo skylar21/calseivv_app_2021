@@ -18,8 +18,6 @@ function alertExaminee() {
 
 function countdown(elementName, minutes, seconds) {
 
-     console.log(PF('dlgWidget'));
-
     var element, endTime, hours, mins, msLeft, time;
 
     function twoDigits(n) {
@@ -29,7 +27,8 @@ function countdown(elementName, minutes, seconds) {
     function updateTimer() {
         msLeft = endTime - (+new Date);
         if (msLeft < 1000) {
-            element.innerHTML = "countdown's over!";
+            element.innerHTML = "Examination Over!";
+            PF('alertTimeWidget').show();
         } else {
             time = new Date(msLeft);
             hours = time.getUTCHours();

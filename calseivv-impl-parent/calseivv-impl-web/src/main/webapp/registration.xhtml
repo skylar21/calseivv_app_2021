@@ -79,7 +79,8 @@
 
                         <h:outputText value="Birthdate: "/>
                         <p:datePicker id="navigator" value="#{registrationController.registrationRequest.birthdate}"
-                                      monthNavigator="true" yearNavigator="true" label="Birthdate" required="true"/>
+                                      monthNavigator="true" yearNavigator="true" label="Birthdate" required="true"
+                                      yearRange="1990:2010"/>
                         <p:message for="navigator" display="icon"/>
 
                     </h:panelGrid>

@@ -111,7 +111,7 @@ public class QuestionService {
                         int multipleAnswerSize = multipleAnswers.length;
                         int correctAnswerCtr = 0;
                         for (String indivAnswer : multipleAnswers) {
-                            if (userAnswer.equalsIgnoreCase(indivAnswer) || indivAnswer.toLowerCase().contains(userAnswer.toLowerCase())) {
+                            if ((userAnswer.equalsIgnoreCase(indivAnswer) || userAnswer.toLowerCase().contains(indivAnswer.toLowerCase())) && !userAnswer.isEmpty()) {
                                 correctAnswerCtr++;
                             }
                         }

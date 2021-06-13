@@ -21,11 +21,12 @@
         </p:card>
     </div>
     <h:form id="examForm">
-        <p:dialog widgetvar="dlgWidget" visible="true" modal="true" onHide="countdown('countdown', 70, 0)">
+        <p:dialog widgetVar="dlgWidget" visible="true" modal="true" onHide="countdown('countdown', 70, 0)">
             <f:facet name="header">
                 Reminder
             </f:facet>
-            You are about to take a 50-item exam.<br/> Please make sure to answer all the questions with honesty and
+            You are about to take a 70-minute 50-item exam.<br/> Please make sure to answer all the questions with
+            honesty and
             follow
             the directions carefully. <br/><br/>
 
@@ -34,6 +35,21 @@
             <b>Padayon, CCSISter!</b>
 
         </p:dialog>
+
+        <p:dialog widgetVar="alertTimeWidget" modal="true" closable="false">
+            <f:facet name="header">
+                Time's Up!
+            </f:facet>
+
+            Thank you for taking the exam. Proceed to check out your score.
+            <p:divider/>
+            <div align="center">
+                <p:commandButton id="proceedBtn" action="#{examController.check}" value="Proceed"
+                                 update="examForm" immediate="true"/>
+            </div>
+
+        </p:dialog>
+
         <p:toolbar>
             <p:toolbarGroup>
                 <p:graphicImage name="images/logo.svg" height="70px" width="150px"/>

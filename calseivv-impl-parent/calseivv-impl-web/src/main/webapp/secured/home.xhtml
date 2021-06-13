@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
     <title>Home</title>
     <link rel="stylesheet" href="../resources/css/style.css" type="text/css"/>
@@ -42,6 +43,7 @@
                                 height="150px" width="200px" cache="false"/>
                         <p:graphicImage name="images/user_icon.svg" height="150px" width="200px" cache="false"
                                         rendered="#{empty homeController.contentResponse.contentImagesMap['portrait']}"/>
+                        <br/><br/>
                         <p:button value="Verified" styleClass="ui-button-success ui-button-flat"
                                   rendered="#{homeController.userResponse.userInfo.verified}"
                                   disabled="true" alt="verified"/>
@@ -62,8 +64,23 @@
                         <h:outputText value=" You cannot take the exam unless verified"
                                       rendered="#{not homeController.userVerified}"/>
                         <br/><br/>
-                        <p:button value="Take Exam" outcome="/secured/exam.jsf?faces-redirect=true"
-                                  rendered="#{homeController.userVerified and not homeController.displayScore}"/>
+
+                        <c:set var="uid" value="#{homeController.userResponse.userInfo.id}"/>
+
+                        <p:commandButton value="Take Exam" action="#{homeController.takeExam}"
+                                         rendered="#{homeController.userVerified and not homeController.displayScore}">
+                            <p:confirm header="Confirmation"
+                                       message="Proceed to take the Examination?"
+                                       icon="pi pi-exclamation-triangle"/>
+                        </p:commandButton>
+
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true"
+                                         width="450">
+                            <p:commandButton value="Go Back" type="button"
+                                             styleClass="ui-confirmdialog-no ui-button-flat"/>
+                            <p:commandButton value="Proceed" type="button" styleClass="ui-confirmdialog-yes"/>
+                        </p:confirmDialog>
+
                     </p:card>
                     <p:card rendered="#{homeController.displayScore}">
                         <f:facet name="title">

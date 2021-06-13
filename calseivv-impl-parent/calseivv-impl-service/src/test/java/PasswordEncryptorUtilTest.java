@@ -34,4 +34,26 @@ public class PasswordEncryptorUtilTest {
         System.out.println(text);
     }
 
+    @Test
+    @Ignore
+    public void answerTest() {
+        String answer = "Inertia,Acceleration,Action Reaction";
+        String userAnswer = "inertia,acceleration,action reaction";
+        String[] multipleAnswers = answer.split(",");
+        int multipleAnswerSize = multipleAnswers.length;
+        int correctAnswerCtr = 0;
+        for (String indivAnswer : multipleAnswers) {
+            System.out.println("ANSWER: " + indivAnswer);
+            System.out.println("indivAnswer.toLowerCase(): " + indivAnswer.toLowerCase());
+            System.out.println("userAnswer.toLowerCase(): " + userAnswer.toLowerCase());
+            System.out.println((userAnswer.equalsIgnoreCase(indivAnswer)));
+            System.out.println(userAnswer.toLowerCase().contains(indivAnswer.toLowerCase()));
+            if ((userAnswer.equalsIgnoreCase(indivAnswer) || userAnswer.toLowerCase().contains(indivAnswer.toLowerCase())) && !userAnswer.isEmpty()) {
+                correctAnswerCtr++;
+            }
+        }
+        System.out.println(correctAnswerCtr);
+
+    }
+
 }

@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -133,6 +135,10 @@ public class HomeController {
             tcRequest.setUserRole(UserRoleEnum.EX.toString());
             userResponseList = userService.getUsers(tcRequest);
         }
+    }
+
+    public void takeExam() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/secured/exam.jsf");
     }
 
     public GetUserRequest getUserRequest() {
